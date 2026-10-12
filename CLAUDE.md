@@ -48,9 +48,14 @@ pnpm dev           # 개발 서버 (http://localhost:3000)
 pnpm build         # 프로덕션 빌드
 pnpm start         # 빌드 결과 실행
 pnpm lint          # ESLint 검사
+pnpm lint:fix      # ESLint 자동 수정
+pnpm test          # Vitest watch 모드 (저장할 때마다 재실행)
+pnpm test:run      # Vitest 1회 실행 (CI용)
+pnpm test:ui       # Vitest 결과를 브라우저 UI로 보기
+pnpm test:run src/lib/format.test.ts   # 테스트 파일 하나만 실행
 ```
 
-테스트 프레임워크는 설정되어 있지 않다.
+테스트는 **Vitest + React Testing Library**(jsdom 환경). 설정은 `vitest.config.mts`, 공통 셋업은 `vitest.setup.ts`(jest-dom 매처 등록 + 테스트마다 `cleanup`). 테스트 파일은 `src/**/*.test.{ts,tsx}`로 대상 코드 옆에 두고, `@/*` 별칭을 그대로 쓸 수 있다. 쿼리는 `getByRole`/`getByText` 같은 의미 기반으로 쓰고 한 테스트에는 한 가지만 검사한다(`docs/lecture-notes/02-testing.md`).
 
 ## 아키텍처
 
